@@ -8,7 +8,7 @@ jobs:
     name: Hello
     steps:
       - name: Hello
-        uses: mougenko/create-release-note:master
+        uses: mougenko/create-release-note@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           message: hello
