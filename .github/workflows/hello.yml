@@ -1,0 +1,14 @@
+name: Run Hello Action
+on:
+  pull_request:
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    name: Hello
+    steps:
+      - name: Hello
+        uses: mougenko/create-release-note:master
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: hello
