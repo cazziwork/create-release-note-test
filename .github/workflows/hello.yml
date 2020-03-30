@@ -17,6 +17,6 @@ jobs:
             const octokit = new github.GitHub(myToken);
             const { data: issues } = octokit.issues.listForRepo({
               'mougenko',
-              'create-release-note-test',
+              'create-release-note-test'
             });
             console.log(issues);
