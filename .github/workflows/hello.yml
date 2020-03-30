@@ -54,6 +54,7 @@ jobs:
             });
             console.log(release_body);
 
+            /**
             const res_update = await github.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo
@@ -61,3 +62,4 @@ jobs:
               body: release_body
             });
             console.log(res_update);
+            */
