@@ -9,16 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: Get issues and push body
         uses: actions/github-script@0.9.0
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          version: ${{ steps.get_version.outputs.VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(version);
+            console.log(context.payload.ref.replace(/\/refs\/tags\//, ''););
             github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
