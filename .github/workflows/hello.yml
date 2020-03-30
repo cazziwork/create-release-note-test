@@ -14,7 +14,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            //console.log(context.payload);
+            console.log(context.payload);
 
             const tag_name = context.payload.ref.replace('refs\/tags\/', '');
             console.log('tag_name:' + tag_name);
@@ -26,6 +26,7 @@ jobs:
               response.data.forEach(issue => {
                 try {
                   if (issue.milestone.title == tag_name) {
+                    
                     console.log(issue)
                   }
                 } catch(error) {
