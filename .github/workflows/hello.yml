@@ -39,14 +39,18 @@ jobs:
               exit;
             }
 
+            let release_body = '';
             res_issues.data.forEach(issue => {
               try {
                 if (issue.milestone.title == tag_name) {
-
-                  console.log(issue)
+                  release_body += '- ';
+                  release_body += issue.title + ' ';
+                  release_body += '#' + issue.number;
+                  release_body += '\n';
                 }
               } catch(error) {
                 // マイルストーンなしはそのまま継続
               }
             });
+            console.log(release_body);
 
