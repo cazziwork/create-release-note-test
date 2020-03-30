@@ -18,6 +18,12 @@ jobs:
 
             const tag_name = context.payload.ref.replace('refs\/tags\/', '');
             console.log('tag_name:' + tag_name);
+            const response = await github.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tag_name
+            });
+            console.log(response);
 
             github.issues.listForRepo({
               owner: context.repo.owner,
