@@ -28,7 +28,7 @@ jobs:
               exit;
             }
             console.log(res_release);
-            const release_id = res_release.data.id;
+            const rel_id = res_release.data.id;
 
             const res_issues = await github.issues.listForRepo({
               owner: context.repo.owner,
@@ -53,4 +53,17 @@ jobs:
               }
             });
             console.log(release_body);
+
+            const res_update = await github.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+              release_id: rel_id,
+              body: release_body
+            });
+            if (res_update.status != 200) {
+              console.log('Edit a release fail');
+              exit;
+            }
+            console.log(res_update);
+
 
