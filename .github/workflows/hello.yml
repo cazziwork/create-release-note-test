@@ -54,12 +54,14 @@ jobs:
             });
             console.log(release_body);
 
-            /**
             const res_update = await github.repos.updateRelease({
               owner: context.repo.owner,
-              repo: context.repo.repo
+              repo: context.repo.repo,
               release_id: rel_id,
               body: release_body
             });
+            if (res_update.status != 200) {
+              console.log('Edit a release fail');
+              exit;
+            }
             console.log(res_update);
-            */
