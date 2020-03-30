@@ -13,8 +13,14 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: issues } = github.issues.listForRepo({
-              owner: 'mougenko',
-              repo: 'create-release-note-test'
+            const res = await github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo
             });
-            console.log(issues);
+            res.data.forEach((x) => {
+              octokit.issues.listEvents({
+                owner,
+                repo,
+                x.number
+              }).then((event) => console.log(event)).catch((error) => console.log("ERROR: " + error));
+            }
