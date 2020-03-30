@@ -14,17 +14,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(context.payload);
+            //console.log(context.payload);
 
             const tag_name = context.payload.ref.replace('refs\/tags\/', '');
             console.log('tag_name:' + tag_name);
 
             github.issues.listForRepo({
               owner: context.repo.owner,
-              repo: context.repo.repo,
-              milestone: tag_name.replace('v', '')
+              repo: context.repo.repo
             }).then(response => {
               response.data.forEach(issue => {
-                console.log(issue)
+                if (issue.milestone.title == tag_name) {
+                  console.log(issue)
+                }
               });
             });
