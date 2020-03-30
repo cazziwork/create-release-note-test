@@ -1,14 +1,21 @@
 name: Run Hello Action
-on:
+on: 
   pull_request:
+    types: [closed]
 
 jobs:
   hello:
     runs-on: ubuntu-latest
-    name: Hello
+    name: Test
     steps:
-      - name: Hello
-        uses: mougenko/create-release-note@master
+      - uses: actions/github-script@0.9.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: hello
+          script: |
+            const myToken = core.getInput('repo-token');
+            const octokit = new github.GitHub(myToken);
+            const { data: issues } = octokit.issues.listForRepo({
+              'mougenko',
+              'create-release-note-test',
+            });
+            console.log(issues);
