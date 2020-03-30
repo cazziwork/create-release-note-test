@@ -13,9 +13,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const myToken = core.getInput('repo-token');
-            const octokit = new github.GitHub(myToken);
-            const { data: issues } = octokit.issues.listForRepo({
+            const { data: issues } = github.issues.listForRepo({
               owner: 'mougenko',
               repo: 'create-release-note-test'
             });
