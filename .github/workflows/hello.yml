@@ -15,28 +15,38 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             console.log(context.payload);
-
             const tag_name = context.payload.ref.replace('refs\/tags\/', '');
+
             console.log('tag_name:' + tag_name);
-            const response = await github.repos.getReleaseByTag({
+            const res_release = await github.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: tag_name
             });
-            console.log(response);
+            if (res_release.status != 200) {
+              console.log('Get a release by tag name fail');
+              exit;
+            }
+            console.log(res_release);
+            const release_id = res_release.data.id;
 
-            github.issues.listForRepo({
+            const res_issues = await github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo
-            }).then(response => {
-              response.data.forEach(issue => {
-                try {
-                  if (issue.milestone.title == tag_name) {
-                    
-                    console.log(issue)
-                  }
-                } catch(error) {
-                  // マイルストーンなしはそのまま継続
-                }
-              });
             });
+            if (res_issues.status != 200) {
+              console.log('List repository issues fail');
+              exit;
+            }
+
+            res_issues.data.forEach(issue => {
+              try {
+                if (issue.milestone.title == tag_name) {
+
+                  console.log(issue)
+                }
+              } catch(error) {
+                // マイルストーンなしはそのまま継続
+              }
+            });
+
