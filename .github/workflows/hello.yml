@@ -15,11 +15,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             console.log(context.payload);
-            console.log(context.payload.ref.replace('refs\/tags\/', ''));
+
+            const tag_name = context.payload.ref.replace('refs\/tags\/', '');
+            console.log('tag_name:' + tag_name);
+
             github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              state: 'open'
+              milestone: tag_name
             }).then(response => {
               response.data.forEach(issue => {
                 console.log(issue)
