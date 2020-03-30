@@ -24,8 +24,12 @@ jobs:
               repo: context.repo.repo
             }).then(response => {
               response.data.forEach(issue => {
-                if (issue.milestone.title == tag_name) {
-                  console.log(issue)
+                try {
+                  if (issue.milestone.title == tag_name) {
+                    console.log(issue)
+                  }
+                } catch(error) {
+                  console.log(error)
                 }
               });
             });
