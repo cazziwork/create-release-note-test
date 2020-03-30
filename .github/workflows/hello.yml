@@ -30,7 +30,7 @@ jobs:
                     console.log(issue)
                   }
                 } catch(error) {
-                  console.log(error)
+                  // マイルストーンなしはそのまま継続
                 }
               });
             });
