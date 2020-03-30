@@ -22,7 +22,7 @@ jobs:
             github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              milestone: tag_name
+              milestone: tag_name.replace('v', '')
             }).then(response => {
               response.data.forEach(issue => {
                 console.log(issue)
