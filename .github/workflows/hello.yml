@@ -20,6 +20,5 @@ jobs:
             }).then(response => {
               response.data.forEach(issue => {
                 console.log(issue)
-                });
               });
             });
