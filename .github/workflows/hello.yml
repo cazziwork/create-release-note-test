@@ -60,10 +60,4 @@ jobs:
               release_id: rel_id,
               body: release_body
             });
-            if (res_update.status != 200) {
-              console.log('Edit a release fail');
-              exit;
-            }
             console.log(res_update);
-
-
