@@ -14,7 +14,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(context.payload.ref.replace(/\/refs\/tags\//, ''));
+            console.log(context.payload.ref.replace('refs\/tags\/', ''));
             github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
