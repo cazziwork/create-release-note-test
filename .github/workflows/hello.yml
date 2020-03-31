@@ -2,7 +2,7 @@ name: Run Hello Action
 on:
   push:
     tags:
-      - 'v*'
+      - 'hoge'
 
 jobs:
   hello:
