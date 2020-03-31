@@ -1,0 +1,15 @@
+name: Run Hello Action
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - name: Get issues and push body
+        uses: mougenko/create-release-note@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
