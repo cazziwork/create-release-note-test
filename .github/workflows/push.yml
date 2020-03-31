@@ -2,7 +2,7 @@ name: Create release note
 on:
   push:
     tags:
-      - 'v'
+      - 'v*'
 
 jobs:
   job-name:
