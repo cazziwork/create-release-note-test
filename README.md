@@ -1,4 +1,3 @@
 # create-release-note-test
 
-a
-b
+a b c
